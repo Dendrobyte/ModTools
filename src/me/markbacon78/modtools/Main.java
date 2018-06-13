@@ -1,12 +1,15 @@
 package me.markbacon78.modtools;
 
+import me.markbacon78.modtools.clockbreaker.ClockBreakInventoryMoveListener;
 import me.markbacon78.modtools.clockbreaker.ClockBreakListener;
 import me.markbacon78.modtools.clockbreaker.ClockBreakerDropListener;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
+import java.util.HashMap;
 
 /**
  * Created by Mark on 6/12/2018.
@@ -20,6 +23,7 @@ public class Main extends JavaPlugin {
 
     private static Main main;
     private static String prefix = "§8[§3ModTools§8]§3 ";
+    private static HashMap<Player, Integer> clockBreakerClicks = new HashMap<Player, Integer>(); // Used for limiting clicks for the clockbreaker item.
 
     @Override
     public void onEnable(){
@@ -36,6 +40,7 @@ public class Main extends JavaPlugin {
         // Register events
         Bukkit.getServer().getPluginManager().registerEvents(new ClockBreakListener(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new ClockBreakerDropListener(), this);
+        Bukkit.getServer().getPluginManager().registerEvents(new ClockBreakInventoryMoveListener(), this);
     }
 
     @Override

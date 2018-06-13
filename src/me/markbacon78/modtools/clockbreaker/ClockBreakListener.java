@@ -44,7 +44,8 @@ public class ClockBreakListener implements Listener {
             if(!player.hasPermission("modtools.use")){
                 player.sendMessage(prefix + "§4You can't use that tool!");
                 player.getInventory().getItemInMainHand().setAmount(0);
-                // TODO: Add a 4 block limit.
+
+                
                 return;
             }
             player.sendMessage(prefix + "Removing item which is assumably part of a clock!");
