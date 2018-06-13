@@ -44,6 +44,10 @@ public class CommandBase implements CommandExecutor {
                 }
                 if(args[0].equalsIgnoreCase("clockbreaker")){
                     BreakerItem clockBreaker = new BreakerItem(Material.STICK);
+                    if(player.getInventory().contains(clockBreaker.getItem())){
+                        player.sendMessage(prefix + "§cIt appears your inventory already contains a ClockBreaker!");
+                        return true;
+                    }
                     player.getInventory().setItem(0, clockBreaker.getItem());
                     player.sendMessage(prefix + "You have received a legendary Clock Breaker!");
                     player.sendMessage(prefix + "You have a 4 block limit before the item is removed from your inventory.");

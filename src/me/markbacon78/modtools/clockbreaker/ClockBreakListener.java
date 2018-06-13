@@ -40,6 +40,7 @@ public class ClockBreakListener implements Listener {
             return;
         }
         else if(itemInHand.equals(clockBreaker.getItem())){
+            // TODO: Check to make sure they are in the creative world (Add a config value!)
             if(!player.hasPermission("modtools.use")){
                 player.sendMessage(prefix + "§4You can't use that tool!");
                 player.getInventory().getItemInMainHand().setAmount(0);
