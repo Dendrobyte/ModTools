@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="ModTools">
+    <output-path>$USER_HOME$/Desktop/MC Server (Vid)/plugins</output-path>
+    <root id="archive" name="ModTools.jar">
+      <element id="module-output" name="MC Plugins" />
+    </root>
+  </artifact>
+</component>

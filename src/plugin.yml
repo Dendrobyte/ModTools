@@ -1,0 +1,13 @@
+name: ModTools
+version: 0.1.1
+main: me.markbacon78.modtools.Main
+author: Markbacon78
+description: Tools for moderators to use outside of plugins and bypass certain permissions for Oinkcraft.
+commands:
+  modtools:
+    aliases: [mtools]
+    description: The base ModTool command to enable all your ModTool needs!
+    usage: /mtools help
+permissions:
+  modtools.use:
+    description: Allows a player, or rank, to use the modtools command.
