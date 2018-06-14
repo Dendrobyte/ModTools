@@ -10,6 +10,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.HashMap;
+
 /**
  * Created by Mark on 6/12/2018.
  * Written for project ModTools
@@ -22,18 +24,9 @@ public class ClockBreakListener implements Listener {
 
     String prefix = Main.getInstance().getPrefix();
 
-    @EventHandler
-    public void onBlockBreak(BlockBreakEvent event){
-        if(event.getBlock().getType().equals(Material.GRASS)){
-            event.setCancelled(true);
-            event.getPlayer().sendMessage("Protected area that you can't edit, almost like a plot...");
-        }
-    }
-
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onClockBreak(BlockBreakEvent event){
         Player player = event.getPlayer();
-        Block block = event.getBlock(); // To be used for the block check. See the TO-DO below.
         ItemStack itemInHand = player.getInventory().getItemInMainHand();
         BreakerItem clockBreaker = new BreakerItem(Material.STICK);
         if(!itemInHand.equals(clockBreaker.getItem())){
@@ -41,15 +34,30 @@ public class ClockBreakListener implements Listener {
         }
         else if(itemInHand.equals(clockBreaker.getItem())){
             // TODO: Check to make sure they are in the creative world (Add a config value!)
+            // TODO: Redstone block check
             if(!player.hasPermission("modtools.use")){
                 player.sendMessage(prefix + "§4You can't use that tool!");
                 player.getInventory().getItemInMainHand().setAmount(0);
-
-                
                 return;
             }
-            player.sendMessage(prefix + "Removing item which is assumably part of a clock!");
-            event.setCancelled(false); // Careful!
+            // Careful! This bypasses other event checks!
+            event.setCancelled(false);
+            player.sendMessage(prefix + "Clockpart cleared!");
+
+            // Block limit. HashMap in the Main class for static reasons.
+            if(!Main.getClockBreakerClicks().containsKey(player)){
+                Main.getClockBreakerClicks().put(player, 0);
+            }
+            int currentClicks = Main.getClockBreakerClicks().get(player);
+            currentClicks++;
+            Main.getClockBreakerClicks().replace(player, currentClicks);
+            if(currentClicks > 3){
+                player.getInventory().remove(clockBreaker.getItem());
+                Main.getClockBreakerClicks().remove(player);
+                player.sendMessage(prefix + "You have hit your 4 block limit. The ClockBreaker has been removed from your inventory!");
+            }
+
+            return;
         }
 
     }

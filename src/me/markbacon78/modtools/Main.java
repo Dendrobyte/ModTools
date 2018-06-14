@@ -69,4 +69,8 @@ public class Main extends JavaPlugin {
         return prefix;
     }
 
+    public static HashMap<Player, Integer> getClockBreakerClicks(){
+        return clockBreakerClicks;
+    }
+
 }

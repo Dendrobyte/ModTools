@@ -34,7 +34,7 @@ public class BreakerItem {
         ItemMeta breakerMeta = item.getItemMeta();
         breakerMeta.setDisplayName("§3§o§lClockBreaker");
         ArrayList<String> breakerLore = new ArrayList<>();
-        breakerLore.add("This item is to be used by ONLY MODERATORS!");
+        breakerLore.add("This item is to be used by ONLY Moderators!");
         breakerLore.add("Please use to destroy ONLY clocks!");
         breakerMeta.setLore(breakerLore);
         item.setItemMeta(breakerMeta);

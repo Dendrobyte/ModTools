@@ -3,6 +3,7 @@ package me.markbacon78.modtools.clockbreaker;
 import me.markbacon78.modtools.Main;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -26,13 +27,11 @@ public class ClockBreakerDropListener implements Listener {
     @EventHandler
     public void ClockBreakerDrop(PlayerDropItemEvent event){
         Player dropper = event.getPlayer();
-        ItemStack itemDropped = (ItemStack) event.getItemDrop();
+        Item droppedStick = event.getItemDrop();
+        ItemStack itemDropped = droppedStick.getItemStack();
         BreakerItem clockBreaker = new BreakerItem(Material.STICK);
-        ItemStack resetItem = new ItemStack(Material.STICK);
         if(itemDropped.equals(clockBreaker.getItem())){
-            itemDropped.setItemMeta(resetItem.getItemMeta());
-            Entity entityDropped = (Entity) itemDropped;
-            entityDropped.remove();
+            itemDropped.setAmount(0);
             dropper.sendMessage(prefix + "You've dropped your ClockBreaker and it has thus been destroyed. Please be careful!");
         }
     }
