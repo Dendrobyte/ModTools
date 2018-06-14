@@ -31,6 +31,7 @@ public class CommandBase implements CommandExecutor {
         if(cmd.getName().equalsIgnoreCase("modtools")){
             if(!player.hasPermission("modtools.use")){
                 player.sendMessage(prefix + "You must be a Moderator to use ModTools!");
+                player.sendMessage(prefix + "§2If you are a moderator... make sure you're in the creative world.");
                 return true;
             } else {
                 if(args.length == 0){

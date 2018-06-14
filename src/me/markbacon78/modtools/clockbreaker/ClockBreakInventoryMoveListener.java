@@ -24,9 +24,12 @@ public class ClockBreakInventoryMoveListener implements Listener {
 
     @EventHandler
     public void onPlayerMoveClockBreaker(InventoryClickEvent event){
+        if(event.getCurrentItem() == null) {
+            return;
+        }
         BreakerItem breakerItem = new BreakerItem(Material.STICK);
         ItemStack item = event.getCurrentItem();
-        if(item.isSimilar(breakerItem.getItem())){
+        if (item.isSimilar(breakerItem.getItem())) {
             event.setCancelled(true);
             Player player = (Player) event.getWhoClicked();
             player.closeInventory();
